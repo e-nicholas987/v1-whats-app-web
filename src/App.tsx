@@ -1,25 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Messages from "components/messages";
+import ChatListPanel from "components/chatListPanel";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Dev branch.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className="w-[100vw] h-[100vh]">
+      <div className="w-full h-full flex">
+        <ChatListPanel />
+        <Messages />
+      </div>
+    </section>
   );
 }
 
