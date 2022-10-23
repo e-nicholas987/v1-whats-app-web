@@ -11,23 +11,24 @@ interface IProps {
     messages: [];
     userName: string;
   };
+  chatFocus: string;
+  onChatFocus: (chatId: string) => void;
 }
 
-const ChatPanelMessage = ({ chat }: IProps) => {
-  const [activeChatId, setActiveChatId] = useState(null);
+const ChatPanelMessage = ({ chat, chatFocus, onChatFocus }: IProps) => {
   const [activeChatHover, setActiveChatHover] = useState(null);
   const { dispatch } = useChatContext();
 
   return (
     <div
       onClick={() => {
-        setActiveChatId(chat.id);
+        onChatFocus(chat.id);
         dispatch({ type: "MARK_AS_READ", id: chat.id });
       }}
       onMouseOver={() => setActiveChatHover(chat.id)}
       onMouseLeave={() => setActiveChatHover(null)}
       className={`h-[72px] flex pl-[13px] items-center hover:bg-[color:var(--background-default-hover)] cursor-pointer ${
-        activeChatId === chat.id
+        chatFocus === chat.id
           ? "bg-[color:var(--background-default-active)]"
           : ""
       }`}
@@ -36,7 +37,7 @@ const ChatPanelMessage = ({ chat }: IProps) => {
       <BsPersonCircle className="text-white h-[60px] w-[60px]" />
       <div
         className={`relative h-full w-full pr-[15px] pl-[15px] border-t-[1px] flex flex-col justify-center hover:border-[color:var(--background-default-hover)] ${
-          activeChatId === chat.id
+          chatFocus === chat.id
             ? "border-[color:var(--background-default-hover)]"
             : "border-[color:var(--border-list)]"
         }`}
