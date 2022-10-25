@@ -24,15 +24,17 @@ const ChatPanelMessageOptions = ({
       {show && (
         <ul
           ref={nodeRef}
-          className="absolute top-full left-[calc(100%-15px)] py-[9px] bg-[color:var(--dropdown-background)] z-40"
+          className="absolute top-full left-[calc(100%-15px)] py-[9px] bg-[color:var(--dropdown-background)] z-40 rounded-[3px]"
         >
           {options.map((options) => (
-            <li
-              className="h-10 whitespace-nowrap pr-[58px] text-[color:var(--primary)] pl-6 flex items-center"
-              key={options.value}
-            >
-              {options.label}
-            </li>
+            <div className="hover:bg-[color:var(--dropdown-background-hover)]">
+              <li
+                className="h-10 whitespace-nowrap pr-[58px] text-[color:var(--primary)] pl-6 flex items-center"
+                key={options.value}
+              >
+                {options.label}
+              </li>
+            </div>
           ))}
         </ul>
       )}
