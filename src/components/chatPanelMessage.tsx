@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useChatContext } from "../context/chatContext";
 import { BsPersonCircle } from "react-icons/bs";
-import { FaChevronDown } from "react-icons/fa";
 import { mostRecentMessage } from "utils/helpers";
+import ChatPanelMessageOptions from "components/chatPanelMessageOptions";
 
 interface IProps {
   chat: {
@@ -64,7 +64,7 @@ const ChatPanelMessage = ({ chat, chatFocus, onChatFocus }: IProps) => {
             )}
           </span>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between relative">
           <p
             className={`text-[color:var(--chat-meta)] text-sm ${
               !chat.read ? "font-bold" : "font-normal"
@@ -72,13 +72,9 @@ const ChatPanelMessage = ({ chat, chatFocus, onChatFocus }: IProps) => {
           >
             {mostRecentMessage(chat.messages).message}
           </p>
-          <button>
-            <FaChevronDown
-              className={`transition-all text-[color:var(--chat-meta)] h-[15px] ${
-                activeChatHover ? "w-[15px]" : "w-0"
-              }`}
-            />
-          </button>
+          <ChatPanelMessageOptions
+            activeChatHover={activeChatHover}
+          />
         </div>
       </div>
     </div>
