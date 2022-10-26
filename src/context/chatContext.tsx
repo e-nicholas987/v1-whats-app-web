@@ -26,6 +26,9 @@ const ChatProvider = ({ children }) => {
 
   //update local storage on every change to chat state
   useEffect(() => {
+    // test dark mode
+    document.documentElement.classList.add("dark");
+    // 
     localStorage.setItem("chats", JSON.stringify(chats));
   }, [chats]);
 
