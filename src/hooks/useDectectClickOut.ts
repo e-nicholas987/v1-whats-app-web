@@ -6,6 +6,13 @@ const useDetectClickOut = () => {
   const nodeRef = useRef(null);
 
   const handleDetectClickOut = (e) => {
+    if (
+      triggerRef.current &&
+      triggerRef.current.contains(e.target) &&
+      nodeRef.current
+    ) {
+      return setShow(false);
+    }
     if (triggerRef.current && triggerRef.current.contains(e.target)) {
       return setShow(true);
     }
