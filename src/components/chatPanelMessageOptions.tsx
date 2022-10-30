@@ -6,7 +6,7 @@ const ChatPanelMessageOptions = ({
 }: {
   activeChatHover: string;
 }) => {
-  const { show, triggerRef, nodeRef } = useDetectClickOut();
+  const { show, setShow, triggerRef, nodeRef } = useDetectClickOut();
   const options = [
     { label: "Archive Chat", value: "archiveChat" },
     { label: "Pin Chat", value: "pinChat" },
@@ -14,7 +14,14 @@ const ChatPanelMessageOptions = ({
   ];
   return (
     <>
-      <button ref={triggerRef} className="focus:outline-none">
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          setShow(!show);
+        }}
+        ref={triggerRef}
+        className="focus:outline-none"
+      >
         <FaChevronDown
           className={`transition-all text-[color:var(--chat-meta)] h-[15px] ${
             activeChatHover ? "w-[15px]" : "w-0"
