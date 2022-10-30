@@ -36,7 +36,7 @@ const ChatPanelMessage = ({ chat, chatFocus, onChatFocus }: IProps) => {
     >
       <BsPersonCircle className="text-white h-[60px] w-[60px]" />
       <div
-        className={`relative h-full w-full pr-[15px] pl-[15px] border-t-[1px] flex flex-col justify-center hover:border-[color:var(--background-default-hover)] ${
+        className={`relative h-full w-full pr-[15px] ml-[15px] border-t-[1px] flex flex-col justify-center hover:border-[color:var(--background-default-hover)] ${
           chatFocus === chat.id
             ? "border-[color:var(--background-default-hover)]"
             : "border-[color:var(--border-list)]"
