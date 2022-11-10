@@ -1,28 +1,29 @@
 import { useState } from "react";
 import { useChatContext } from "../context/chatContext";
-import { BsPersonCircle } from "react-icons/bs";
 import { mostRecentMessage } from "utils/helpers";
 import ChatPanelMessageOptions from "components/chatPanelMessageOptions";
+import chidi from "assets/images/chidi-avatar.jpeg";
 
 interface IProps {
   chat: {
-    id: string;
-    read: string;
+    id: number;
+    read: boolean;
     messages: [];
     userName: string;
   };
-  chatFocus: string;
-  onChatFocus: (chatId: string) => void;
+  chatFocus: number;
+  onChatFocus: (chatId: number) => void;
 }
 
 const ChatPanelMessage = ({ chat, chatFocus, onChatFocus }: IProps) => {
   const [activeChatHover, setActiveChatHover] = useState(null);
-  const { dispatch } = useChatContext();
+  const [chatOptionsActive, setChatOptionsActive] = useState(false);
+  const { dispatch, chats } = useChatContext();
 
   return (
     <div
       onClick={() => {
-        onChatFocus(chat.id);
+        // console.log("click");
         dispatch({ type: "MARK_AS_READ", id: chat.id });
       }}
       onMouseOver={() => setActiveChatHover(chat.id)}
@@ -34,7 +35,11 @@ const ChatPanelMessage = ({ chat, chatFocus, onChatFocus }: IProps) => {
       }`}
       key={chat.id}
     >
-      <BsPersonCircle className="text-white h-[60px] w-[60px]" />
+      <img
+        src={chidi}
+        alt="avatar"
+        className="text-white h-[49px] w-[49px] rounded-full"
+      />
       <div
         className={`relative h-full w-full pr-[15px] ml-[15px] border-t-[1px] flex flex-col justify-center hover:border-[color:var(--background-default-hover)] ${
           chatFocus === chat.id
@@ -74,6 +79,9 @@ const ChatPanelMessage = ({ chat, chatFocus, onChatFocus }: IProps) => {
           </p>
           <ChatPanelMessageOptions
             activeChatHover={activeChatHover}
+            chatId={chat.id}
+            // isRead={chat.read}
+            onButtonClick={() => setChatOptionsActive(true)}
           />
         </div>
       </div>
